@@ -211,8 +211,9 @@ app.post('/signup', function(req, res) {
 
     firebase.auth().createUserWithEmailAndPassword(post.email, post.password).then(function(user) {
         console.log('User Created: ' + user.email);
-        req.session.email = post.email;
-        res.redirect('/main');
+        res.render('signup', {
+            message: user.email + ' added.'
+        });
     }).catch(function(error) {
         var errorMessage = error.message;
         console.log('createUserWithEmailAndPassword Error: ' + errorMessage);
