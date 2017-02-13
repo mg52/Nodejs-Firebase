@@ -283,7 +283,10 @@ app.post('/dbUpdate', function(req, res) {
     if(post.itemName != ""){
       firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/' + itemId).update(postData).then(function(user) {
         message = 'Item updated.';
-        res.render('itemDetails', {email: req.session.email, message: message});
+        res.render('myItems', {
+            items: items,
+            email: req.session.email
+        });
       }).catch(function(error) {
           var errorMessage = error.message;
           console.log(errorMessage);
