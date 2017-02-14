@@ -33,22 +33,7 @@ app.use("/public", express.static(__dirname + "/public"));
 
 var server = app.listen(port);
 
-/*firebase.auth().onAuthStateChanged(function(user) {
-if (user) {
-console.log('onAuthStateChanged: ' + user.email);
-res.redirect('/main');
-} else {
-console.log('no user');
-}
-});*/
-
 app.get('/', function(req, res) {
-    /*var user = firebase.auth().currentUser;
-    if (user) {
-    	res.redirect('/main');
-    } else {
-    	res.render('index');
-    }*/
     if (req.session.email)
         res.redirect('/main');
     else
@@ -111,14 +96,6 @@ app.get('/item/:itemName', function(req, res) {
 				console.log(itemId);
               }
 	  }
-	/*items[0].forEach(function(childItem) {
-              if(itemName == childItem.val().itemName){
-                isItem = true;
-                theItem = childItem.val();
-				itemId = childItem.val().id;
-				console.log(itemId);
-              }
-          });*/
           if(isItem){
             console.log(theItem);
             res.render('itemDetails', {
@@ -148,13 +125,6 @@ app.get('/information', function(req, res) {
     } else
         res.redirect('/');
 
-    /*var userId = firebase.auth().currentUser.uid;
-    return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-      var username = snapshot.val().username;
-      var email = snapshot.val().email;
-      console.log(username);
-      console.log(email);
-    });*/
 });
 
 app.get('/signup', function(req, res) {
